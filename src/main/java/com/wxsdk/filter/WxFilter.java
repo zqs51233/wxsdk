@@ -5,7 +5,10 @@ import com.wxsdk.bean.Message;
 import com.wxsdk.util.NetUtil;
 import com.wxsdk.util.StringUtil;
 import com.wxsdk.util.XmlUtil;
+import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
 
+import javax.annotation.Resource;
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -28,11 +31,19 @@ public class WxFilter implements Filter {
     private static final String ECHOSTR = "echostr";
     private static final String TOKEN = "token";
 
+    @Resource
     IMessageService messageService;
 
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
+
+        WebApplicationContext ctx = WebApplicationContextUtils.getRequiredWebApplicationContext(filterConfig.getServletContext());
+        messageService = (IMessageService) ctx.getBean("messageService");
+
+        if(messageService==null){
+            throw new RuntimeException("messageService is null ,you should implement the ImessageService interface firstly.");
+        }
     }
 
     @Override
