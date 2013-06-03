@@ -16,4 +16,5 @@ public interface IMessageService {
      * @return
      */
     public Message dispose(Message msg);
+
 }
