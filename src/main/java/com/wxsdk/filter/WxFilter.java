@@ -8,7 +8,6 @@ import com.wxsdk.util.XmlUtil;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
-import javax.annotation.Resource;
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -29,18 +28,17 @@ public class WxFilter implements Filter {
     private static final String TIMESTAMP = "timestamp";
     private static final String NONCE = "nonce";
     private static final String ECHOSTR = "echostr";
-    private static final String TOKEN = "token";
 
-    @Resource
+    private  static  final String  GET_METHOD_NAME="get";
+
+
     IMessageService messageService;
 
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-
         WebApplicationContext ctx = WebApplicationContextUtils.getRequiredWebApplicationContext(filterConfig.getServletContext());
         messageService = (IMessageService) ctx.getBean("messageService");
-
         if(messageService==null){
             throw new RuntimeException("messageService is null ,you should implement the ImessageService interface firstly.");
         }
@@ -53,7 +51,7 @@ public class WxFilter implements Filter {
         response.setContentType("text/xml;charset=utf-8");
         response.setCharacterEncoding("utf-8");
         String method = httpServletRequest.getMethod();
-        if ("get".equalsIgnoreCase(method)) {
+        if (GET_METHOD_NAME.equalsIgnoreCase(method)) {
             this.doAuth(httpServletRequest, httpServletResponse);
         } else {
             this.dispose(httpServletRequest, httpServletResponse);
@@ -67,16 +65,19 @@ public class WxFilter implements Filter {
         Message receivedMsg = XmlUtil.parseXML2Bean(receivedXmlStr);
         Message respMsg = messageService.dispose(receivedMsg);
         retXmlStr = XmlUtil.parseBean2Xml(respMsg);
-        this.writeRespStr(resp, retXmlStr, true);
+        if(receivedXmlStr!=null){
+            this.writeRespStr(resp, retXmlStr, true);
+        }
     }
 
     private void doAuth(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String encodedStr = null;
+        String token = messageService.getToken();
         String signature = req.getParameter(SIGNATURE);
         String timestamp = req.getParameter(TIMESTAMP);
         String nonce = req.getParameter(NONCE);
         String echostr = req.getParameter(ECHOSTR);
-        encodedStr = StringUtil.encode(TOKEN, timestamp, nonce);
+        encodedStr = StringUtil.encode(token, timestamp, nonce);
         if (encodedStr != null && encodedStr.equals(signature)) {
             writeRespStr(resp, echostr, true);
         }
@@ -100,8 +101,6 @@ public class WxFilter implements Filter {
             }
         }
     }
-
-
     @Override
     public void destroy() {
 

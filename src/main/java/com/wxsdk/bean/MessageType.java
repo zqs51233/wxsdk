@@ -8,7 +8,7 @@ package com.wxsdk.bean;
  * To change this template use File | Settings | File Templates.
  */
 public enum MessageType {
-    TEXT("text"),LOCATION("location"),PICTEXT("news");
+    TEXT("text"),LOCATION("location"),PICTEXT("news"),PIC("pic"),LINK("link"),EVENT("event");
 
     public static MessageType getType(String txt){
        for(MessageType messageType:MessageType.values()){

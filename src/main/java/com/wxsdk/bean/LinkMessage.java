@@ -1,5 +1,7 @@
 package com.wxsdk.bean;
 
+import org.dom4j.Element;
+
 /**
  * Created with IntelliJ IDEA.
  * User: Administrator
@@ -12,6 +14,14 @@ public class LinkMessage extends Message {
     private String description;
     private String url;
     private EventType eventType;
+
+    public LinkMessage(Element element_) {
+        super(element_);
+        this.setMessageType(MessageType.LINK);
+        this.setTitle(element_.elementTextTrim("Title"));
+        this.setDescription(element_.elementTextTrim("Description"));
+        this.setUrl(element_.elementTextTrim("Url"));
+    }
 
     public EventType getEventType() {
         return eventType;

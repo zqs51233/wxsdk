@@ -1,5 +1,7 @@
 package com.wxsdk.bean;
 
+import org.dom4j.Element;
+
 /**
  * Created with IntelliJ IDEA.
  * User: Administrator
@@ -13,6 +15,20 @@ public class LocationMessage extends Message {
     private double locationY;
     private int scale;
     private String label;
+
+    public LocationMessage() {
+    }
+
+    public LocationMessage( Element element_) {
+        super(element_);
+        this.setMessageType(MessageType.LOCATION);
+        this.setLocationX(Double.valueOf(element_.elementTextTrim("Location_X")));
+        this.setLocationY(Double.valueOf(element_.elementTextTrim("Location_Y")));
+        this.setScale(Integer.valueOf(element_.elementTextTrim("Scale")));
+        this.setLabel(element_.elementTextTrim("Label"));
+    }
+
+
 
     public double getLocationX() {
         return locationX;

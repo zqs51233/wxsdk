@@ -50,108 +50,34 @@ public class XmlUtil {
         }
         switch (messageType) {
             case TEXT:
-                TextMessage textMessage = new TextMessage();
-                textMessage.setFromUserName(element_.elementTextTrim("FromUserName"));
-                textMessage.setToUserName(element_.elementTextTrim("ToUserName"));
-                textMessage.setCreateTime(Long.valueOf(element_.elementTextTrim("CreateTime")));
-                textMessage.setMessageType(messageType);
-                textMessage.setContent(element_.elementTextTrim("Content"));
-                textMessage.setMsgId(element_.elementTextTrim("MsgId"));
-                message = textMessage;
+                message = new TextMessage(element_);;
                 break;
             case LOCATION:
-                LocationMessage locationMessage = new LocationMessage();
-                locationMessage.setFromUserName(element_.elementTextTrim("FromUserName"));
-                locationMessage.setToUserName(element_.elementTextTrim("ToUserName"));
-                locationMessage.setCreateTime(Long.valueOf(element_.elementTextTrim("CreateTime")));
-                locationMessage.setMessageType(messageType);
-                locationMessage.setMsgId(element_.elementTextTrim("MsgId"));
-                locationMessage.setLocationX(Double.valueOf(element_.elementTextTrim("Location_X")));
-                locationMessage.setLocationY(Double.valueOf(element_.elementTextTrim("Location_Y")));
-                locationMessage.setScale(Integer.valueOf(element_.elementTextTrim("Scale")));
-                locationMessage.setLabel(element_.elementTextTrim("Label"));
-                message = locationMessage;
+                message =  new LocationMessage(element_);
+                break;
+            case  PIC:
+                message = new PicMessage(element_);
+                break;
+            case LINK:
+                message =new LinkMessage(element_);
+                break;
+            case EVENT:
+                message = new EventMessage(element_);
                 break;
         }
         return message;
     }
     public static String parseBean2Xml(Message message){
-        if(message==null){
-            return "";
+        String xml = null;
+        if(message!=null){
+            xml=message.getXML();
         }
-        //todo
-        return null;
+        return xml;
     }
 
-    public static String parseBean2Xml(TextMessage textMessage_){
-        Document document = DocumentHelper.createDocument();
-        Element xmlEle = document.addElement("xml");
-        loadBasicXmlInfos(xmlEle,textMessage_);
-        Element ctEle = xmlEle.addElement("Content");
-        ctEle.setText(textMessage_.getContent());
-
-        Element  funcFlagEle = xmlEle.addElement("FuncFlag");
-        funcFlagEle.setText(String.valueOf(textMessage_.getFuncFlag()));
-
-        return document.asXML();
-
-    }
-    private static void loadBasicXmlInfos(Element xmlEle, Message message_){
-        Element toUserEle = xmlEle.addElement("ToUserName");
-        toUserEle.setText(message_.getToUserName());
-
-        Element fromUserEle = xmlEle.addElement("FromUserName");
-        fromUserEle.setText(message_.getFromUserName());
-
-        Element createTimeEle = xmlEle.addElement("CreateTime");
-        createTimeEle.setText(String.valueOf(message_.getCreateTime()));
-
-        Element msgTypeEle = xmlEle.addElement("MsgType");
-        msgTypeEle.setText(message_.getMessageType().getText());
 
 
 
-    }
-
-    public static String parseBean2Xml(PicTextReplayMessage picTextReplayMessage){
-        if(picTextReplayMessage==null){
-            return null;
-        }
-
-        Document document = DocumentHelper.createDocument();
-        Element xmlEle = document.addElement("xml");
-        loadBasicXmlInfos(xmlEle,picTextReplayMessage);
-        Element articleCountEle = xmlEle.addElement("ArticleCount");
-        articleCountEle.setText(String.valueOf(picTextReplayMessage.getArticleCount()));
-        Element  articlesEle = xmlEle.addElement("Articles") ;
-        // 明细
-        Element itemEle=null;
-        for(Article article:picTextReplayMessage.getArticles()){
-            itemEle = articlesEle.addElement("item");
-            loadXmlFromArticle(itemEle,article);
-        }
-
-        Element  funcFlagEle = xmlEle.addElement("FuncFlag");
-        funcFlagEle.setText(String.valueOf(picTextReplayMessage.getFuncFlag()));
-        return document.asXML();
-    }
-    public static void loadXmlFromArticle(Element parent_,Article article_){
-        Element itemTitleEle=null;
-        Element itemDesEle=null;
-        Element itemPicUrlEle=null;
-        Element itemUrlEle=null;
-        itemTitleEle = parent_.addElement("Title");
-        itemTitleEle.setText(article_.getTitle()==null?"":article_.getTitle());
-
-        itemDesEle = parent_.addElement("Description");
-        itemDesEle.setText(article_.getDescription()==null?"":article_.getDescription());
-
-        itemPicUrlEle = parent_.addElement("PicUrl");
-        itemPicUrlEle.setText(article_.getPicUrl()==null?"":article_.getPicUrl());
-
-        itemUrlEle = parent_.addElement("Url");
-        itemUrlEle.setText(article_.getUrl()==null?"":article_.getUrl());
-    }
 
 
 

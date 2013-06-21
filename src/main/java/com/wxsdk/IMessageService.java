@@ -17,4 +17,10 @@ public interface IMessageService {
      */
     public Message dispose(Message msg);
 
+    /**
+     * 获取token
+     * @return
+     */
+    public String getToken();
+
 }

@@ -1,5 +1,11 @@
 package com.wxsdk.bean;
 
+import com.wxsdk.bean.Article;
+import com.wxsdk.bean.Message;
+import org.dom4j.Document;
+import org.dom4j.DocumentHelper;
+import org.dom4j.Element;
+
 import java.util.List;
 
 /**
@@ -29,5 +35,23 @@ public class PicTextReplayMessage extends Message {
 
     public void setArticleCount(long articleCount) {
         this.articleCount = articleCount;
+    }
+    @Override
+    public String getXML(){
+        Document document = DocumentHelper.createDocument();
+        Element xmlEle = document.addElement("xml");
+        super.loadBasicXmlInfos(xmlEle);
+        Element articleCountEle = xmlEle.addElement("ArticleCount");
+        articleCountEle.setText(String.valueOf(this.getArticleCount()));
+        Element  articlesEle = xmlEle.addElement("Articles") ;
+        // 明细
+        Element itemEle=null;
+        for(Article article:this.getArticles()){
+            itemEle = articlesEle.addElement("item");
+            article.loadXmlFromArticle(itemEle);
+        }
+        Element  funcFlagEle = xmlEle.addElement("FuncFlag");
+        funcFlagEle.setText(String.valueOf(this.getFuncFlag()));
+        return document.asXML();
     }
 }
