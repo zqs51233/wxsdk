@@ -18,7 +18,7 @@ public class MusicMessage extends Message {
     private String hqMusicUrl;   // 高质量音乐链接，WIFI环境优先使用该链接播放音乐
 
     @Override
-    protected String getXML() {
+    public String getXML() {
         Document document = DocumentHelper.createDocument();
         Element xmlEle = document.addElement("xml");
         super.loadBasicXmlInfos(xmlEle);
