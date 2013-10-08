@@ -68,7 +68,7 @@ public class WxFilter implements Filter {
         String retXmlStr = null;
         String receivedXmlStr = NetUtil.receiveData(req);
         Message receivedMsg = XmlUtil.parseXML2Bean(receivedXmlStr);
-        Message respMsg = messageService.dispose(receivedMsg);
+        Message respMsg = messageService.disposeMsg(receivedMsg);
         retXmlStr = XmlUtil.parseBean2Xml(respMsg);
         if (receivedXmlStr != null) {
             this.writeRespStr(resp, retXmlStr, true);

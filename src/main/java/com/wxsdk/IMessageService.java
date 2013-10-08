@@ -16,7 +16,7 @@ public interface IMessageService {
      * @param msg,可能为空，实现类需判空处理。
      * @return message处理结果
      */
-    public Message dispose(Message msg);
+    public Message disposeMsg(Message msg);
 
     /**
      * 获取token
