@@ -12,10 +12,11 @@ import org.dom4j.Element;
  * To change this template use File | Settings | File Templates.
  */
 public class MusicMessage extends Message {
+
     private String title;
     private String description;
     private String musicUrl;
-    private String hqMusicUrl;   // 高质量音乐链接，WIFI环境优先使用该链接播放音乐
+    private String hqMusicUrl; // 高质量音乐链接，WIFI环境优先使用该链接播放音乐
 
     @Override
     public String getXML() {
@@ -24,7 +25,7 @@ public class MusicMessage extends Message {
         super.loadBasicXmlInfos(xmlEle);
         Element musicEl = xmlEle.addElement("Music");
 
-        Element titleEl= musicEl.addElement("Title");
+        Element titleEl = musicEl.addElement("Title");
         titleEl.setText(title);
 
         Element despEl = musicEl.addElement("Description");
@@ -36,7 +37,7 @@ public class MusicMessage extends Message {
         Element hqMusicUrlEl = musicEl.addElement("HQMusicUrl");
         hqMusicUrlEl.setText(hqMusicUrl);
 
-        Element  funcFlagEle = xmlEle.addElement("FuncFlag");
+        Element funcFlagEle = xmlEle.addElement("FuncFlag");
         funcFlagEle.setText(String.valueOf(this.getFuncFlag()));
         return document.asXML();
     }

@@ -40,7 +40,6 @@ public class StringUtil {
         return encodedStr;
     }
 
-
     public static String makeSHA1(String str_) {
         MessageDigest md = null;
         String encodedStr = null;

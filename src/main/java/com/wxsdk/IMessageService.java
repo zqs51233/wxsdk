@@ -10,10 +10,11 @@ import com.wxsdk.bean.Message;
  * 需要实现该接口，处理业务逻辑
  */
 public interface IMessageService {
+
     /**
      * 消息处理
-     * @param msg
-     * @return
+     * @param msg,可能为空，实现类需判空处理。
+     * @return message处理结果
      */
     public Message dispose(Message msg);
 

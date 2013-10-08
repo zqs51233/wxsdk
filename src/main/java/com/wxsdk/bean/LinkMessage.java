@@ -10,6 +10,7 @@ import org.dom4j.Element;
  * To change this template use File | Settings | File Templates.
  */
 public class LinkMessage extends Message {
+
     private String title;
     private String description;
     private String url;

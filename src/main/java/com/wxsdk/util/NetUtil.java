@@ -22,11 +22,10 @@ public class NetUtil {
      */
     public static String receiveData(HttpServletRequest request) {
         String inputLine = null;
-        StringBuffer receivedStr = new StringBuffer();
+        StringBuilder receivedStr = new StringBuilder();
         BufferedReader in = null;
         try {
-            in = new BufferedReader(new InputStreamReader(
-                    request.getInputStream(), "UTF-8"));
+            in = new BufferedReader(new InputStreamReader(request.getInputStream(), "UTF-8"));
             while ((inputLine = in.readLine()) != null) {
                 receivedStr.append(inputLine);
             }

@@ -9,18 +9,19 @@ package com.wxsdk.bean;
  */
 public enum EventType {
 
-    subscribe("subscribe"),unsubscribe("unsubscribe"),CLICK("unsubscribe");
+    subscribe("subscribe"), unsubscribe("unsubscribe"), CLICK("unsubscribe");
+
     private String txt;
 
-
-    public static EventType getType(String txt){
-        for(EventType eventType:EventType.values()){
-            if(eventType.getTxt().equals(txt)){
+    public static EventType getType(String txt) {
+        for (EventType eventType : EventType.values()) {
+            if (eventType.getTxt().equals(txt)) {
                 return eventType;
             }
         }
         return null;
     }
+
     EventType(String txt) {
         this.txt = txt;
     }

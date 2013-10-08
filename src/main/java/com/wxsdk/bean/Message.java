@@ -10,16 +10,16 @@ import org.dom4j.Element;
  * To change this template use File | Settings | File Templates.
  */
 public abstract class Message extends BaseObject {
+
     protected String fromUserName; // 发送者
-    protected String toUserName;    // 接收者
-    protected long createTime;      //消息创建时间
+    protected String toUserName; // 接收者
+    protected long createTime; // 消息创建时间
     protected MessageType messageType;
-    private String funcFlag = "0";//位0x0001被标志时，星标刚收到的消息。
+    private String funcFlag = "0";// 位0x0001被标志时，星标刚收到的消息。
 
     protected String msgId;
 
-    public Message() {
-    }
+    public Message() {}
 
     public Message(Element element_) {
         this.setFromUserName(element_.elementTextTrim("FromUserName"));
@@ -45,7 +45,6 @@ public abstract class Message extends BaseObject {
     public String getXML() {
         return null;
     }
-
 
     public String getFuncFlag() {
         return funcFlag;
@@ -93,5 +92,32 @@ public abstract class Message extends BaseObject {
 
     public void setMsgId(String msgId) {
         this.msgId = msgId;
+    }
+
+    public enum MessageType {
+        TEXT("text"), LOCATION("location"), PICTEXT("news"), PIC("pic"), LINK("link"), EVENT("event");
+
+        public static MessageType getType(String txt) {
+            for (MessageType messageType : MessageType.values()) {
+                if (messageType.getText().equals(txt)) {
+                    return messageType;
+                }
+            }
+            return null;
+        }
+
+        private String txt;
+
+        MessageType(String txt) {
+            this.txt = txt;
+        }
+
+        public String getText() {
+            return txt;
+        }
+
+        public void setText(String text) {
+            this.txt = text;
+        }
     }
 }

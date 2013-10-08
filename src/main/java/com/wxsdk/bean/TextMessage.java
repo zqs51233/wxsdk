@@ -12,6 +12,7 @@ import org.dom4j.Element;
  * To change this template use File | Settings | File Templates.
  */
 public class TextMessage extends Message {
+
     private String content;
 
     public TextMessage(Element element_) {
@@ -21,17 +22,16 @@ public class TextMessage extends Message {
     }
 
     @Override
-    public   String getXML(){
+    public String getXML() {
         Document document = DocumentHelper.createDocument();
         Element xmlEle = document.addElement("xml");
         super.loadBasicXmlInfos(xmlEle);
         Element ctEle = xmlEle.addElement("Content");
         ctEle.setText(this.getContent());
-        Element  funcFlagEle = xmlEle.addElement("FuncFlag");
+        Element funcFlagEle = xmlEle.addElement("FuncFlag");
         funcFlagEle.setText(String.valueOf(this.getFuncFlag()));
         return document.asXML();
     }
-
 
     public String getContent() {
         return content;

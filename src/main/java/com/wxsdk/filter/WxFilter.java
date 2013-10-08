@@ -8,7 +8,12 @@ import com.wxsdk.util.XmlUtil;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
-import javax.servlet.*;
+import javax.servlet.Filter;
+import javax.servlet.FilterChain;
+import javax.servlet.FilterConfig;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -23,29 +28,29 @@ import java.io.PrintWriter;
  */
 public class WxFilter implements Filter {
 
-
     private static final String SIGNATURE = "signature";
     private static final String TIMESTAMP = "timestamp";
     private static final String NONCE = "nonce";
     private static final String ECHOSTR = "echostr";
 
-    private  static  final String  GET_METHOD_NAME="get";
-
+    private static final String GET_METHOD_NAME = "get";
 
     IMessageService messageService;
 
-
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-        WebApplicationContext ctx = WebApplicationContextUtils.getRequiredWebApplicationContext(filterConfig.getServletContext());
+        WebApplicationContext ctx = WebApplicationContextUtils.getRequiredWebApplicationContext(filterConfig
+                .getServletContext());
         messageService = (IMessageService) ctx.getBean("messageService");
-        if(messageService==null){
-            throw new RuntimeException("messageService is null ,you should implement the ImessageService interface firstly.");
+        if (messageService == null) {
+            throw new RuntimeException(
+                    "messageService is null ,you should implement the ImessageService interface firstly.");
         }
     }
 
     @Override
-    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException,
+            ServletException {
         HttpServletRequest httpServletRequest = (HttpServletRequest) request;
         HttpServletResponse httpServletResponse = (HttpServletResponse) response;
         response.setContentType("text/xml;charset=utf-8");
@@ -65,7 +70,7 @@ public class WxFilter implements Filter {
         Message receivedMsg = XmlUtil.parseXML2Bean(receivedXmlStr);
         Message respMsg = messageService.dispose(receivedMsg);
         retXmlStr = XmlUtil.parseBean2Xml(respMsg);
-        if(receivedXmlStr!=null){
+        if (receivedXmlStr != null) {
             this.writeRespStr(resp, retXmlStr, true);
         }
     }
@@ -79,7 +84,7 @@ public class WxFilter implements Filter {
         String echostr = req.getParameter(ECHOSTR);
         encodedStr = StringUtil.encode(token, timestamp, nonce);
         if (encodedStr != null && encodedStr.equals(signature)) {
-            writeRespStr(resp, echostr, true);
+            this.writeRespStr(resp, echostr, true);
         }
     }
 
@@ -101,6 +106,7 @@ public class WxFilter implements Filter {
             }
         }
     }
+
     @Override
     public void destroy() {
 

@@ -10,6 +10,7 @@ import org.dom4j.Element;
  * To change this template use File | Settings | File Templates.
  */
 public class PicMessage extends Message {
+
     private String picUrl;
 
     public PicMessage(Element element_) {
