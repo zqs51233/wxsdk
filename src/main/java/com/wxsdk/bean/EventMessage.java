@@ -3,11 +3,11 @@ package com.wxsdk.bean;
 import org.dom4j.Element;
 
 /**
- * Created with IntelliJ IDEA.
- * User: Administrator
+ *
+ * User: User: free anuo
  * Date: 13-5-3
  * Time: 下午10:30
- * To change this template use File | Settings | File Templates.
+ * 链接消息
  */
 public class EventMessage extends Message {
 
@@ -45,5 +45,33 @@ public class EventMessage extends Message {
 
     public void setEventKey(String eventKey) {
         this.eventKey = eventKey;
+    }
+
+    public enum EventType {
+
+        subscribe("subscribe"), unsubscribe("unsubscribe"), CLICK("unsubscribe");
+
+        private String txt;
+
+        public static EventType getType(String txt) {
+            for (EventType eventType : EventType.values()) {
+                if (eventType.getTxt().equals(txt)) {
+                    return eventType;
+                }
+            }
+            return null;
+        }
+
+        EventType(String txt) {
+            this.txt = txt;
+        }
+
+        public String getTxt() {
+            return txt;
+        }
+
+        public void setTxt(String txt) {
+            this.txt = txt;
+        }
     }
 }

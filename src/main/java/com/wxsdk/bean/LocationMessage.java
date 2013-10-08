@@ -3,11 +3,11 @@ package com.wxsdk.bean;
 import org.dom4j.Element;
 
 /**
- * Created with IntelliJ IDEA.
- * User: Administrator
+ *
+ * User: free anuo
  * Date: 13-5-3
  * Time: 下午10:27
- * To change this template use File | Settings | File Templates.
+ * 位置消息
  */
 public class LocationMessage extends Message {
 

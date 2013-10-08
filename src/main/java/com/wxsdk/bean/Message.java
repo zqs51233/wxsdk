@@ -3,11 +3,11 @@ package com.wxsdk.bean;
 import org.dom4j.Element;
 
 /**
- * Created with IntelliJ IDEA.
- * User: Administrator
+ *
+ * User: free anuo
  * Date: 13-5-2
  * Time: 下午11:18
- * To change this template use File | Settings | File Templates.
+ * 消息基础类
  */
 public abstract class Message extends BaseObject {
 
@@ -94,7 +94,7 @@ public abstract class Message extends BaseObject {
         this.msgId = msgId;
     }
 
-    public enum MessageType {
+    public  enum MessageType {
         TEXT("text"), LOCATION("location"), PICTEXT("news"), PIC("pic"), LINK("link"), EVENT("event");
 
         public static MessageType getType(String txt) {

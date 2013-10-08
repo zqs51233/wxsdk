@@ -6,8 +6,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 /**
- * Created with IntelliJ IDEA.
- * User: Administrator
+ *
+ * User: free anuo
  * Date: 13-5-4
  * Time: 上午9:19
  * To change this template use File | Settings | File Templates.

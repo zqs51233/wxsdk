@@ -14,8 +14,8 @@ import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
 
 /**
- * Created with IntelliJ IDEA.
- * User: zhangqisheng
+ *
+ * User: free anuo
  * Date: 13-5-3
  * Time: 上午12:31
  * xml 工具类

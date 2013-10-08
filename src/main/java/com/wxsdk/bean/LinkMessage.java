@@ -1,13 +1,14 @@
 package com.wxsdk.bean;
 
+import com.wxsdk.bean.EventMessage.EventType;
 import org.dom4j.Element;
 
 /**
- * Created with IntelliJ IDEA.
- * User: Administrator
+ *
+ * User: free anuo
  * Date: 13-5-3
  * Time: 下午10:29
- * To change this template use File | Settings | File Templates.
+ * 链接消息
  */
 public class LinkMessage extends Message {
 

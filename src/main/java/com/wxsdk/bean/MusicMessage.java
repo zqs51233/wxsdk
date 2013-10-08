@@ -5,11 +5,11 @@ import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
 
 /**
- * Created with IntelliJ IDEA.
- * User: Administrator
+ *
+ * User: free anuo
  * Date: 13-5-3
  * Time: 下午10:20
- * To change this template use File | Settings | File Templates.
+ * 音乐消息
  */
 public class MusicMessage extends Message {
 
