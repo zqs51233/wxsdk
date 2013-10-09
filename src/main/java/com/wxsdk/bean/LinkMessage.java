@@ -19,7 +19,6 @@ public class LinkMessage extends Message {
 
     public LinkMessage(Element element_) {
         super(element_);
-        this.setMessageType(MessageType.LINK);
         this.setTitle(element_.elementTextTrim("Title"));
         this.setDescription(element_.elementTextTrim("Description"));
         this.setUrl(element_.elementTextTrim("Url"));

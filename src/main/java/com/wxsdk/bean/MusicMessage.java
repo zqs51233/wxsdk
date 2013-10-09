@@ -18,6 +18,8 @@ public class MusicMessage extends Message {
     private String musicUrl;
     private String hqMusicUrl; // 高质量音乐链接，WIFI环境优先使用该链接播放音乐
 
+
+
     @Override
     public String getXML() {
         Document document = DocumentHelper.createDocument();

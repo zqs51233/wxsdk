@@ -17,7 +17,6 @@ public class TextMessage extends Message {
 
     public TextMessage(Element element_) {
         super(element_);
-        this.setMessageType(MessageType.TEXT);
         this.setContent(element_.elementTextTrim("Content"));
     }
 

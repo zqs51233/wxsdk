@@ -15,7 +15,6 @@ public class PicMessage extends Message {
 
     public PicMessage(Element element_) {
         super(element_);
-        this.setMessageType(MessageType.PIC);
         this.setPicUrl(element_.elementTextTrim("PicUrl"));
     }
 

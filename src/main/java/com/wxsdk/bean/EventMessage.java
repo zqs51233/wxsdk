@@ -17,7 +17,6 @@ public class EventMessage extends Message {
 
     public EventMessage(Element element_) {
         super(element_);
-        this.setMessageType(MessageType.EVENT);
         this.setEvent(element_.elementTextTrim("Event"));
         this.setEventKey(element_.elementTextTrim("EventKey"));
         this.setEventType(EventType.getType(this.getEvent()));
@@ -49,7 +48,7 @@ public class EventMessage extends Message {
 
     public enum EventType {
 
-        subscribe("subscribe"), unsubscribe("unsubscribe"), CLICK("unsubscribe");
+        subscribe("subscribe"), unsubscribe("unsubscribe"), click("CLICK");
 
         private String txt;
 

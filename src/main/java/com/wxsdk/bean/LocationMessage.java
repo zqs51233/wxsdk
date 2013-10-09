@@ -20,7 +20,6 @@ public class LocationMessage extends Message {
 
     public LocationMessage(Element element_) {
         super(element_);
-        this.setMessageType(MessageType.LOCATION);
         this.setLocationX(Double.valueOf(element_.elementTextTrim("Location_X")));
         this.setLocationY(Double.valueOf(element_.elementTextTrim("Location_Y")));
         this.setScale(Integer.valueOf(element_.elementTextTrim("Scale")));

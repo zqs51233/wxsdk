@@ -105,6 +105,14 @@ public class WxFilter implements Filter {
         }
     }
 
+    public IMessageService getMessageService() {
+        return messageService;
+    }
+
+    public void setMessageService(IMessageService messageService) {
+        this.messageService = messageService;
+    }
+
     @Override
     public void destroy() {
 

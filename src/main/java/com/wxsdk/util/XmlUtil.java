@@ -72,6 +72,8 @@ public class XmlUtil {
         case EVENT:
             message = new EventMessage(element_);
             break;
+        default:
+            throw  new IllegalArgumentException("推送消息类型无法识别");
         }
         return message;
     }

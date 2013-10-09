@@ -14,7 +14,7 @@ public abstract class Message extends BaseObject {
     protected String fromUserName; // 发送者
     protected String toUserName; // 接收者
     protected long createTime; // 消息创建时间
-    protected MessageType messageType;
+    protected MessageType messageType;    //消息类型,
     private String funcFlag = "0";// 位0x0001被标志时，星标刚收到的消息。
 
     protected String msgId;
@@ -26,6 +26,7 @@ public abstract class Message extends BaseObject {
         this.setToUserName(element_.elementTextTrim("ToUserName"));
         this.setCreateTime(Long.valueOf(element_.elementTextTrim("CreateTime")));
         this.setMsgId(element_.elementTextTrim("MsgId"));
+        this.setMessageType(MessageType.getType(element_.elementTextTrim("MsgType")));
     }
 
     protected void loadBasicXmlInfos(Element xmlEle) {
