@@ -1,4 +1,4 @@
-package com.wxsdk.filter;
+package com.wxsdk.web.filter;
 
 import com.wxsdk.IMessageService;
 import com.wxsdk.bean.Message;
@@ -32,21 +32,19 @@ public class WxFilter implements Filter {
     private static final String TIMESTAMP = "timestamp";
     private static final String NONCE = "nonce";
     private static final String ECHOSTR = "echostr";
-
     private static final String GET_METHOD_NAME = "get";
-
     IMessageService messageService;
-
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
         WebApplicationContext ctx = WebApplicationContextUtils.getRequiredWebApplicationContext(filterConfig
                 .getServletContext());
-        messageService = (IMessageService) ctx.getBean("messageService");
-        if (messageService == null) {
+        this.messageService =  ctx.getBean(IMessageService.class);
+        if (this.messageService == null) {
             throw new RuntimeException(
                     "messageService is null ,you should implement the ImessageService interface firstly.");
         }
     }
+
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException,

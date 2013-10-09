@@ -21,6 +21,11 @@ public class TextMessage extends Message {
         this.setContent(element_.elementTextTrim("Content"));
     }
 
+    public TextMessage() {
+        super();
+    }
+
+
     @Override
     public String getXML() {
         Document document = DocumentHelper.createDocument();

@@ -5,8 +5,7 @@ import com.wxsdk.bean.PicTextReplayMessage;
 import com.wxsdk.bean.PicTextReplayMessage.Article;
 
 /**
- * Created with IntelliJ IDEA.
- * User: zhangqisheng
+ * User: free anuo
  * Date: 13-10-8
  * Time: 下午3:45
  * To change this template use File | Settings | File Templates.

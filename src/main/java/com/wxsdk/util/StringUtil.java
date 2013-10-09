@@ -22,34 +22,25 @@ public class StringUtil {
             return null;
         }
         List<String> validateStrs = new ArrayList<String>(3);
-        StringBuilder stringBuilder = null;
-        String encodedStr = null;
-        int strLen = 0;
-        strLen += (token_ != null ? token_.length() : 0);
-        strLen += (timeStamp_ != null ? timeStamp_.length() : 0);
-        strLen += (once_ != null ? once_.length() : 0);
         validateStrs.add(token_);
         validateStrs.add(timeStamp_);
         validateStrs.add(once_);
         Collections.sort(validateStrs);
-        stringBuilder = new StringBuilder(strLen);
-        for (String str : validateStrs) {
-            stringBuilder.append(str);
-        }
-        encodedStr = StringUtil.makeSHA1(stringBuilder.toString());
-        return encodedStr;
+        return StringUtil.makeSHA1(StringUtils.join(validateStrs,""));
     }
 
     public static String makeSHA1(String str_) {
         MessageDigest md = null;
         String encodedStr = null;
-        try {
-            md = MessageDigest.getInstance("SHA1");
-            md.update(str_.getBytes());
-            encodedStr = new BigInteger(1, md.digest()).toString(16);
-        } catch (Exception e) {
-            encodedStr = null;
-            e.printStackTrace();
+        if (str_ != null) {
+            try {
+                md = MessageDigest.getInstance("SHA1");
+                md.update(str_.getBytes());
+                encodedStr = new BigInteger(1, md.digest()).toString(16);
+            } catch (Exception e) {
+                encodedStr = null;
+                e.printStackTrace();
+            }
         }
         return encodedStr;
     }

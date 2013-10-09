@@ -52,15 +52,13 @@ public class XmlUtil {
 
     private static Message parseElement(Element element_) {
         Message message = null;
-        MessageType messageType = null;
-        messageType = getMessageType(element_.elementTextTrim(MSGTYPE));
+        MessageType messageType = getMessageType(element_.elementTextTrim(MSGTYPE));
         if (messageType == null) {
             return message;
         }
         switch (messageType) {
         case TEXT:
             message = new TextMessage(element_);
-            ;
             break;
         case LOCATION:
             message = new LocationMessage(element_);
